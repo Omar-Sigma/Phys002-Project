@@ -2,6 +2,7 @@ import tkinter as tk0
 import tkinter.ttk as ttk0
 from tkinter.constants import DISABLED
 from ttkthemes import ThemedStyle #This is in order to implement a certain theme. The colors, however, are manually created.
+import re
 
 """
 Note: you have to install ttkthemes using pip. Run this command in any shell (cmd, powershell, bash, etc):-
@@ -69,29 +70,64 @@ but since we are using a procedural approach, we can't do that as easily (if at 
 """
 #These are going to be some user-defined variables and the "previous answer" variable
 
+def closeinput(message):
+    inputstatus.insert(0, f"Status: {message}")
+    inputstatus.configure(state="readonly")
+
+def finalwrite(a0):
+    try:
+        if inputconth.get() != "":
+            amatch=re.search("\/\*conth\*\/(.*)=(.*);", a0).group(2)
+            a0=re.sub(amatch, f" {inputconth.get()} ", a0, 1)
+        else:
+            pass
+
+        if inputsensh.get() != "":
+            amatch=re.search("\/\*sensh\*\/(.*)=(.*);", a0).group(2)
+            a0=re.sub(amatch, f" {inputsensh.get()} ", a0, 1)
+        else:
+            pass
+
+        if inputmaxl.get() != "":
+            amatch=re.search("\/\*maxl\*\/(.*)=(.*);", a0).group(2)
+            a0=re.sub(amatch, f" {inputmaxl.get()} ", a0, 1)
+        else:
+            pass
+
+        f1=open("codetest.ino", "w")
+        f1.write(a0)
+        f1.close()
+     
+    except:
+        closeinput("Error: Unexpected error!")
+
+
+
 def changevalue():
     """
-    This function appends the values entered by the user to three files.
-    This should be later changed to affect the variables in the arduino file.
+    This function changes the values of the three user-defined variables.
     """
     inputstatus.configure(state="normal") #Make the input field statuus writable
     inputstatus.delete(0, tk0.END) #Delete what was previously in here
-    
-    reqfile1=open("conth.txtcon", "w") #Create and open these files
-    reqfile2=open("sensh.txtcon", "w") 
-    reqfile3=open("maxl.txtcon", "w") 
-    
     try:
-        reqfile1.write(f"{inputconth.get()}") #Put the value in the file
-        reqfile2.write(f"{inputsensh.get()}")
-        reqfile3.write(f"{inputmaxl.get()}")
-        inputstatus.insert(0, "Status: Success!") #Output the status of the operation
-        inputstatus.configure(state="readonly") #Change it back to read only
-    except:
-        inputstatus.insert(0, "Status: Error!")
-        inputstatus.configure(state="readonly")
+        f1=open("codetest.ino", "r")
+        a0=f1.read()
+        f1.close()
+        
+        try:
+            float(inputconth.get())
+            float(inputsensh.get())
+            float(inputmaxl.get())
+            finalwrite(a0)
+        except:
+            closeinput("Error: No charaters allowed!")
 
-    
+    except:
+        closeinput("Error: File not found!")
+
+    #=====Here it goes
+    #=====
+   
 #=================================================
 #=================================================
 #=================================================
