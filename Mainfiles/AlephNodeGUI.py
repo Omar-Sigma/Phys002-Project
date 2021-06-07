@@ -160,8 +160,8 @@ framemain.rowconfigure(3, weight=1)
 
 #The buttons
 buttonassign = tk0.Button(framemain, text="Assign Values"  , bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0,   command=changevalue)
-buttonconth = tk0.Button(framemain, text="Sensor Distance:", state=DISABLED, bg="#343A3E", disabledforeground="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0) 
-buttonsensh = tk0.Button(framemain, text="Container Depth:", state=DISABLED, bg="#343A3E", disabledforeground="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0) 
+buttonconth = tk0.Button(framemain, text="Container Depth:", state=DISABLED, bg="#343A3E", disabledforeground="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0) 
+buttonsensh = tk0.Button(framemain, text="Sensor Distance:", state=DISABLED, bg="#343A3E", disabledforeground="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0) 
 buttonmaxl = tk0.Button(framemain, text="Max Water Level:" , state=DISABLED, bg="#343A3E", disabledforeground="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0 ) 
 
 #The entry fields
