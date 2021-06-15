@@ -164,10 +164,12 @@ def changevalue():
 
 def gotohelp():
     root_win.grid_forget()
+    root_or_win.geometry("980x420")
     helpsection.grid(column=0, row=0, columnspan=2, rowspan=7, padx=4, pady=4, sticky="nesw")
 
 def gotoabout():
     root_win.grid_forget()
+    root_or_win.geometry("980x420")
     aboutsection.grid(column=0, row=0, columnspan=2, rowspan=7, padx=4, pady=4, sticky="nesw")
 
 def gotomain():
@@ -259,13 +261,46 @@ buttonexit = tk0.Button(frameaccess, text="Exit", bg="#343A3E", fg="#2293D6", fo
 #Help
 textofmainh="""This application is designed to set the values of the:-
 1-Container's Height\n2-Sensor's Height\n3-The maximum water level
-You simply type the value you want and
-"""
-buttonmainh = tk0.Button(helpsection, text=textofmainh, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command = gotomain)
-labelh1 = tk0.Label(helpsection, text="Main", bg="#24292C", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0)
+
+You simply type the value you want. And then you can upload the code to the arduino directly.
+
+Do NOT tamper with the arduino (.ino) file!
+
+Leave the arduino .ino file and the application in the same directory.
+
+The application rejects any of the following as input:-
+1-Characters.
+2-Zeros in the Container and Max water level fields.
+3-Decimals."""
+buttonmainh = tk0.Button(helpsection, text="Main", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command = gotomain)
+labelh1 = tk0.Label(helpsection, text=textofmainh, bg="#323938", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0)
+
+
+
+
 
 #About
+textofmaina1="""Phys002 Project: Team AlephNode
+===============================
+This application is designed to set the values of the
+1-Container's Height | 2-Sensor's Height | 3-The maximum water level
+
+It is designed as a complementary GUI software to edit the mentioned
+values for the arduino's code file.
+
+This application was created by Team AlephNode of the Nile University
+for their Physics-002 Project. The members are:-
+1-Abdelrahman | 2-Marawan | 3-Mostafa | 4-Nadine | 5-Omar
+For more info, go to github. Click on the button to copy the link."""
+
+textofmaina2=tk0.StringVar(value="https://github.com/Omar-Sigma/Phys002-Project")
+
 buttonmaina = tk0.Button(aboutsection, text="Main", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command = gotomain)
+labela1 = tk0.Label(aboutsection, text=textofmaina1, bg="#323938", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0)
+buttongithub = tk0.Button(aboutsection, text="Github: ", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command=lambda : root_or_win.clipboard_append("https://github.com/Omar-Sigma/Phys002-Projects")) #This command copies the link to the clipboard
+
+labela2 = tk0.Entry(aboutsection, textvariable=textofmaina2, bg="#323938", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, insertbackground="#2293D6", width=30, state="readonly", readonlybackground="#323938") 
+
 
 #Placing them
 frameaccess.grid(row=4, column=0, padx=2, pady=2, columnspan=2, rowspan=3, sticky="nesw")
@@ -282,11 +317,14 @@ buttonexit .grid(row=2, column=0, padx=2, pady=2, columnspan=2, sticky="nesw")
 
 #Other non-main frames
 buttonmainh .grid(row=6, column=0, padx=2, pady=2, columnspan=2, sticky="nesw")    
-labelh1     .grid(row=0, column=0, padx=2, pady=2, columnspan=2, sticky="nesw")    
+labelh1     .grid(row=0, column=0, padx=2, pady=2, rowspan=5, columnspan=2, sticky="nesw")    
 
 
 
 buttonmaina .grid(row=6, column=0, padx=2, pady=2, columnspan=2, sticky="nesw")    
+labela1     .grid(row=0, column=0, padx=2, pady=2, rowspan=5, columnspan=2, sticky="nesw")    
+buttongithub .grid(row=5, column=0, padx=2, pady=2, sticky="nesw")    
+labela2     .grid(row=5, column=1, padx=2, pady=2, sticky="nesw")    
 
 
 
