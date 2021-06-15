@@ -20,7 +20,7 @@ This is the root widget initialization. We imported tkinter as tk0 instead of im
 """
 
 root_or_win = tk0.Tk()
-root_or_win.title("Test")
+root_or_win.title("Aleph Node V1.0")
 #root_or_win.iconbitmap("/home/omar/EngST/1st Year/2nd Sem/PHYS002/Project/Phys002-Project/Mainfiles/an.ico")
 s=ThemedStyle(root_or_win)
 s.theme_use('breeze')
@@ -31,6 +31,12 @@ root_win.grid(column=0, row=0, columnspan=2, rowspan=7, padx=4, pady=4, sticky="
 #Creating frames for the help and exit sections
 helpsection=tk0.Frame(root_or_win, bg="#24292C")
 aboutsection=tk0.Frame(root_or_win, bg="#24292C")
+
+#Icon
+try:
+    root_or_win.iconphoto(True, tk0.PhotoImage(file='an.png'))
+except:
+    pass
 #=================================================
 #=================================================
 #=================================================
