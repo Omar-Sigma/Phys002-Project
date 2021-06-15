@@ -4,8 +4,9 @@ This is related to our Nile University PHYS002 project.
 ## Team members
 1. Abdelrahman A.
 2. Marwan M.
-3. Nadine A.
-4. Omar E.
+3. Mostafa A.
+4. Nadine A.
+5. Omar E.
 
 ## This is a GUI tool for defining certain values in an arduino file. It is supposed to make the user define:-
 
