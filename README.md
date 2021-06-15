@@ -16,11 +16,13 @@ This is related to our Nile University PHYS002 project.
 
 ## The files:-
 
-1.ANgui.py: This is the main gui file
-2.the text files with the .txtcon extension are there for testing the application's write functionality (Deprecated: file can directly affect main file now)
-3.The other files are for testing purposes.
-4.codetest.ino and codetest.c are for testing purposes as well.
-5.".gitignore" this is to ignore some dummy/testing/etc files.
+1. ANgui.py: This is the main gui file
+2. the text files with the .txtcon extension are there for testing the application's write functionality (Deprecated: file can directly affect main file now)
+3. The other files are for testing purposes.
+4. codetest.ino and codetest.c are for testing purposes as well.
+5. ".gitignore" this is to ignore some dummy/testing/etc files.
+6. The mainfiles contain mainfiles that were used for development.
+7. The FinalExe directory contains releases and spec files used. You can use these with pyinstaller to rebuild the binaries. Icons and images are included.
 
 ## Important note:
 
@@ -34,6 +36,16 @@ You can do so by issuing the following command in the terminal:-
 or
 
           pip3 install ttkthemes
+          
+You can freeze it with any freezing tool. For example: pyinstaller.
+
+## Important note 2:
+
+For linux binary users, you have to set the appropariate permissions for the binary.
+
+          chmod +x binaryname
+
+should work.
 
 # Regards,
 
