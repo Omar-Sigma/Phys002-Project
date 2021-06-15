@@ -21,12 +21,16 @@ This is the root widget initialization. We imported tkinter as tk0 instead of im
 
 root_or_win = tk0.Tk()
 root_or_win.title("Test")
+#root_or_win.iconbitmap("/home/omar/EngST/1st Year/2nd Sem/PHYS002/Project/Phys002-Project/Mainfiles/an.ico")
 s=ThemedStyle(root_or_win)
 s.theme_use('breeze')
 root_or_win.configure(bg="#24292C")
 #Instead of directly using the original window as a root window, I create a frame inside it that we will use as the root instead, so that we can control it, add padding, and more without affacting the main window.
 root_win=tk0.Frame(root_or_win, bg="#24292C")
 root_win.grid(column=0, row=0, columnspan=2, rowspan=7, padx=4, pady=4, sticky="nesw")
+#Creating frames for the help and exit sections
+helpsection=tk0.Frame(root_or_win, bg="#24292C")
+aboutsection=tk0.Frame(root_or_win, bg="#24292C")
 #=================================================
 #=================================================
 #=================================================
@@ -58,6 +62,27 @@ root_win.rowconfigure(3, weight=1)
 root_win.rowconfigure(4, weight=1)
 root_win.rowconfigure(5, weight=1)
 root_win.rowconfigure(6, weight=1)
+
+#Help and about
+helpsection.columnconfigure(0, weight=1)
+helpsection.columnconfigure(1, weight=1)
+helpsection.rowconfigure(0, weight=1)
+helpsection.rowconfigure(1, weight=1)
+helpsection.rowconfigure(2, weight=1)
+helpsection.rowconfigure(3, weight=1)
+helpsection.rowconfigure(4, weight=1)
+helpsection.rowconfigure(6, weight=1)
+
+aboutsection.columnconfigure(0, weight=1)
+aboutsection.columnconfigure(1, weight=1)
+aboutsection.rowconfigure(0, weight=1)
+aboutsection.rowconfigure(1, weight=1)
+aboutsection.rowconfigure(2, weight=1)
+aboutsection.rowconfigure(3, weight=1)
+aboutsection.rowconfigure(4, weight=1)
+aboutsection.rowconfigure(6, weight=1)
+
+
 
 #=================================================
 #=================================================
@@ -117,10 +142,17 @@ def changevalue():
         f1.close()
         
         try:
-            float(inputconth.get())
-            float(inputsensh.get())
-            float(inputmaxl.get())
-            finalwrite(a0)
+            if inputconth.get() == "0":
+                closeinput("Error: Container's height can't be 0!")
+            elif inputmaxl.get() == "0":
+                closeinput("Error: Max water level can't be 0!")
+            elif type(eval(inputconth.get())) == float or type(eval(inputsensh.get())) == float or type(eval(inputmaxl.get())) == float:
+                closeinput("Error: can't input decimals! Integars only!")
+            else:
+                float(inputconth.get())
+                float(inputsensh.get())
+                float(inputmaxl.get())
+                finalwrite(a0)
         except:
             closeinput("Error: No charaters allowed!")
 
@@ -129,7 +161,27 @@ def changevalue():
 
     #=====Here it goes
     #=====
-   
+
+def gotohelp():
+    root_win.grid_forget()
+    helpsection.grid(column=0, row=0, columnspan=2, rowspan=7, padx=4, pady=4, sticky="nesw")
+
+def gotoabout():
+    root_win.grid_forget()
+    aboutsection.grid(column=0, row=0, columnspan=2, rowspan=7, padx=4, pady=4, sticky="nesw")
+
+def gotomain():
+    try:
+        aboutsection.grid_forget()
+    except:
+        pass
+    try:
+        helpsection.grid_forget()
+    except:
+        pass
+    root_win.grid(column=0, row=0, columnspan=2, rowspan=7, padx=4, pady=4, sticky="nesw")
+
+
 #=================================================
 #=================================================
 #=================================================
@@ -199,9 +251,21 @@ inputmaxl   .grid(row=3, column=1, padx=1, pady=1, sticky="nesw")
 #-----Exit frame
 #Help, About, and Exit buttons and their frames
 frameaccess=tk0.Frame(root_win ,bg="#24292C")
-buttonhelp = tk0.Button(frameaccess, text="Help", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0)
-buttonabout = tk0.Button(frameaccess, text="About", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0)
+buttonhelp = tk0.Button(frameaccess, text="Help", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command = gotohelp)
+buttonabout = tk0.Button(frameaccess, text="About", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command = gotoabout)
 buttonexit = tk0.Button(frameaccess, text="Exit", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command = root_or_win.destroy)
+
+#Other frames
+#Help
+textofmainh="""This application is designed to set the values of the:-
+1-Container's Height\n2-Sensor's Height\n3-The maximum water level
+You simply type the value you want and
+"""
+buttonmainh = tk0.Button(helpsection, text=textofmainh, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command = gotomain)
+labelh1 = tk0.Label(helpsection, text="Main", bg="#24292C", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0)
+
+#About
+buttonmaina = tk0.Button(aboutsection, text="Main", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command = gotomain)
 
 #Placing them
 frameaccess.grid(row=4, column=0, padx=2, pady=2, columnspan=2, rowspan=3, sticky="nesw")
@@ -215,6 +279,19 @@ frameaccess.columnconfigure(1, weight=1)
 buttonhelp .grid(row=0, column=0, padx=2, pady=2, columnspan=2, sticky="nesw")    
 buttonabout.grid(row=1, column=0, padx=2, pady=2, columnspan=2, sticky="nesw")    
 buttonexit .grid(row=2, column=0, padx=2, pady=2, columnspan=2, sticky="nesw")    
+
+#Other non-main frames
+buttonmainh .grid(row=6, column=0, padx=2, pady=2, columnspan=2, sticky="nesw")    
+labelh1     .grid(row=0, column=0, padx=2, pady=2, columnspan=2, sticky="nesw")    
+
+
+
+buttonmaina .grid(row=6, column=0, padx=2, pady=2, columnspan=2, sticky="nesw")    
+
+
+
+
+
 
 #=================================================
 #=================================================
